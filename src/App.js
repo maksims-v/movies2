@@ -34,7 +34,6 @@ function App() {
         <div className="movie_content">
           {!detailMovie && <Filter />}
           <div className="movies">
-            ЖМИ ПОИСК ФИЛЬМА
             <Routes>
               <Route path={`/search`} element={<SearchPage />} />
               {!searchOptions ? (
