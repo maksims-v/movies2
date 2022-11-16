@@ -1,23 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import { movies } from './moviesData';
+import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { moviesFetchingError, get_data } from './moviesSlice/moviesSlice';
+import { useHttp } from './hooks/http.hook';
+import Header from './components/header/Header';
+import MoviList from './components/movieList/MovieList';
+import Filter from './components/filter/Filter.jsx';
+import MovieDetail from './components/movieDetail/MovieDetail.jsx';
+import SearchPage from './components/searchPage/SearchPage';
 
 function App() {
+  const { searchOptions, detailMovie } = useSelector((data) => data);
+  const dispatch = useDispatch();
+  // const { request } = useHttp();
+
+  useEffect(() => {
+    dispatch(get_data(movies));
+  }, []);
+
+  // concurrently
+  // useEffect(() => {
+  //   request('http://localhost:3001/data')
+  //     .then((data) => dispatch(get_data(data)))
+  //     .catch(() => dispatch(moviesFetchingError()));
+  // }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wrapper">
+        <Header />
+        <div className="movie_content">
+          {!detailMovie && <Filter />}
+          <div className="movies">
+            <Routes>
+              <Route path={`/search`} element={<SearchPage />} />
+              {!searchOptions ? (
+                <Route path={`/search/${detailMovie.id}`} element={<MovieDetail />} />
+              ) : (
+                <Route path={`/${detailMovie.id}`} element={<MovieDetail />} />
+              )}
+              <Route index element={<MoviList />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

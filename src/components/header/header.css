@@ -1,0 +1,43 @@
+.header {
+  height: 60px;
+  width: 100%;
+  background-color: #017bff;
+}
+
+.header_menu {
+  font-size: 20px;
+  height: 100%;
+  align-items: center;
+  padding: 0px 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home {
+  color: white;
+}
+
+.closeButton {
+  margin: 20px 0px 0px 0px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.login {
+  color: black;
+  font-weight: bold;
+  background-color: #29a745;
+  padding: 5px 10px;
+  border: 1px solid inherit;
+  border-radius: 5px;
+}
