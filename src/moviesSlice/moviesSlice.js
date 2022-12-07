@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  isAuth: false,
   data: [],
   searchFilterData: [],
   sortData: [],
@@ -10,10 +11,10 @@ const initialState = {
   resetCheckbox: true,
   detailMovie: false,
   searchOptions: true,
-  accountOffOn: false,
   enterAccount: true,
   favoriteOn: false,
   count: 0,
+  currentPageInFilter: 1,
   pageCountBack: 0,
   pageCountNext: 10,
   movieGenreData: [
@@ -94,7 +95,7 @@ const initialState = {
     },
     {
       id: 10770,
-      name: 'телевизионный фильм',
+      name: 'телевизионный',
       toggle: false,
     },
     {
@@ -141,7 +142,7 @@ const moviesSlice = createSlice({
       state = state;
     },
     closeModal: (state) => {
-      state.accountOffOn = state.accountOffOn ? false : true;
+      state.isAuth = state.isAuth ? false : true;
       state.enterAccount = !state.enterAccount ? true : false;
     },
     search_options: (state, action) => {
@@ -174,8 +175,11 @@ const moviesSlice = createSlice({
     openModal: (state) => {
       state.enterAccount = true ? false : true;
     },
+    countcurrentpage: (state, action) => {
+      state.currentPageInFilter = action.payload;
+    },
     exitAccount: (state) => {
-      state.accountOffOn = false;
+      state.isAuth = false;
       state.enterAccount = true;
     },
   },
@@ -203,4 +207,5 @@ export const {
   search_filter_data,
   openModal,
   exitAccount,
+  countcurrentpage,
 } = actions;

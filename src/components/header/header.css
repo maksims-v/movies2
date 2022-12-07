@@ -1,7 +1,7 @@
 .header {
-  height: 60px;
+  height: 70px;
   width: 100%;
-  background-color: #017bff;
+  background-color: #141414;
 }
 
 .header_menu {
@@ -16,21 +16,26 @@
 
 .home {
   color: white;
+  font-weight: 500;
 }
 
 .closeButton {
   margin: 20px 0px 0px 0px;
 }
 
-button {
-  padding: 10px 20px;
+.header_button {
+  font-weight: 400;
+  padding: 7px 20px;
   font-size: 20px;
   border: 1px solid transparent;
   border-radius: 5px;
+  background-color: #005382;
+  color: white;
 }
 
-button:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+.header_button:hover {
+  transition: all 0.3s;
+  box-shadow: 0px 7px 14px lightskyblue, 0 2px 6px hwb(203 53% 2%);
 }
 
 .login {
@@ -40,4 +45,36 @@ button:hover {
   padding: 5px 10px;
   border: 1px solid inherit;
   border-radius: 5px;
+}
+
+.movie_button {
+  line-height: 55px;
+  font-size: 17px;
+  font-weight: bold;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  flex-basis: 20%;
+}
+
+@media (max-width: 700px) {
+  .header_menu {
+    font-size: 20px;
+    height: 100%;
+    align-items: center;
+    padding: 0px 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header_button {
+    font-weight: 400;
+    padding: 5px 10px;
+    font-size: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: #005382;
+    color: white;
+  }
 }

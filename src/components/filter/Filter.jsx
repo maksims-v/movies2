@@ -8,12 +8,13 @@ import {
   pages_count_back_next_reset,
   filtered_sort_data,
   get_data,
+  countcurrentpage,
 } from '../../moviesSlice/moviesSlice';
 
 function Filter() {
   const {
     data,
-    accountOffOn,
+    isAuth,
     searchOptions,
     favoriteOn,
     movieWithFavoriteData,
@@ -21,15 +22,16 @@ function Filter() {
     sortData,
     bookmarksArr,
     movieGenreData,
+    currentPageInFilter,
   } = useSelector((data) => data);
 
   const dispatch = useDispatch();
 
   const [selectedYearReset, setSelectedYearReset] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPage, setNumberOfPage] = useState();
   const [ckeckboxChecked, setCkeckboxChecked] = useState(false);
   const [favoriteValue, setFavoriteValue] = useState();
+  const [raitingValue, setRaitingValue] = useState();
 
   useEffect(() => {
     setNumberOfPage(Math.ceil(sortData.length / 10));
@@ -38,8 +40,10 @@ function Filter() {
   const resetFilter = () => {
     dispatch(get_data(data));
     dispatch(pages_count_back_next_reset());
+    dispatch(countcurrentpage(1));
     setSelectedYearReset('');
-    setCurrentPage(1);
+    setFavoriteValue('');
+    setRaitingValue('');
     setCkeckboxChecked(false);
   };
 
@@ -53,10 +57,11 @@ function Filter() {
     } else if (selectValue === '1') {
       dispatch(favorite_on(true));
       dispatch(filtered_sort_data(bookmarksArr));
+      dispatch(countcurrentpage(1));
     } else if (selectValue === '2') {
       dispatch(favorite_on(true));
       dispatch(filtered_sort_data(favoriteArr));
-      setCurrentPage(1);
+      dispatch(countcurrentpage(1));
     }
   };
 
@@ -77,7 +82,7 @@ function Filter() {
 
   const selectYear = (value) => {
     const year = value.target.value;
-    setCurrentPage(1);
+    dispatch(countcurrentpage(1));
     dispatch(pages_count_back_next_reset());
     setSelectedYearReset(year);
 
@@ -103,16 +108,17 @@ function Filter() {
   };
 
   const pageBack = () => {
-    if (currentPage != 1) {
+    if (currentPageInFilter != 1) {
       dispatch(pages_count_back_next(-10));
-      setCurrentPage(currentPage - 1);
+      dispatch(countcurrentpage(currentPageInFilter - 1));
+    } else if (currentPageInFilter === 1) {
     }
   };
 
   const nextPage = () => {
-    if (currentPage < numberOfPage) {
+    if (currentPageInFilter < numberOfPage) {
       dispatch(pages_count_back_next(10));
-      setCurrentPage(currentPage + 1);
+      dispatch(countcurrentpage(currentPageInFilter + 1));
     }
   };
 
@@ -140,19 +146,17 @@ function Filter() {
             <div className="sort_selected_wrapper">
               <select
                 value={favoriteValue}
-                className={
-                  accountOffOn ? 'sort_selected' : 'sort_selected autorisationUserSelectActive'
-                }
+                className={isAuth ? 'sort_selected' : 'sort_selected autorisationUserSelectActive'}
                 onChange={selectFavorite}>
-                <option value="0" select>
-                  Пользовательские
+                <option value="0" select className="option">
+                  Все
                 </option>
                 <option value="1" select>
                   Смотреть позже
                 </option>
                 <option value="2">Избранные</option>
               </select>
-              <select onChange={selectRaitingValue} className="sort_selected ">
+              <select value={raitingValue} onChange={selectRaitingValue} className="sort_selected ">
                 <option value="0" select>
                   Популярные по убыванию
                 </option>
@@ -187,22 +191,26 @@ function Filter() {
               </Fragment>
             ))}
           </div>
-          <div className="bottom_buttons">
-            <div className="buttons_wrapper">
-              <button
-                onClick={pageBack}
-                className={currentPage === 1 ? 'back active_button' : 'back'}>
-                Назад
-              </button>
-              <button
-                onClick={nextPage}
-                className={currentPage === numberOfPage ? 'next active_button' : 'next'}>
-                Вперёд
-              </button>
-            </div>
-            <div className="number_of_list">
-              <span> {currentPage} </span> of <span>{numberOfPage}</span>
-            </div>
+          <div className="buttons_wrapper">
+            <button
+              onClick={pageBack}
+              className={
+                currentPageInFilter === 1 ? 'back_next_button active' : 'back_next_button'
+              }>
+              Назад
+            </button>
+            <button
+              onClick={nextPage}
+              className={
+                currentPageInFilter === numberOfPage
+                  ? 'back_next_button active'
+                  : 'back_next_button'
+              }>
+              Вперёд
+            </button>
+          </div>
+          <div className="number_of_list">
+            <span> {currentPageInFilter} </span> of <span>{numberOfPage}</span>
           </div>
         </div>
       </div>

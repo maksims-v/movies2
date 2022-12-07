@@ -1,4 +1,5 @@
 import './header.css';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   search_options,
@@ -10,9 +11,8 @@ import { Link } from 'react-router-dom';
 import Modal from '../modal/Modal';
 
 function Header() {
-  const { searchOptions, detailMovie, accountOffOn } = useSelector((data) => data);
+  const { searchOptions, detailMovie, isAuth } = useSelector((data) => data);
   const dispatch = useDispatch();
-
   return (
     <>
       <div className="header">
@@ -21,31 +21,35 @@ function Header() {
             <div className="home" href="">
               {!detailMovie ? (
                 <a href="/" onClick={() => dispatch(detail_movie(false))} className="home" to="/">
-                  Home
+                  MOVIE
                 </a>
               ) : (
                 <Link onClick={() => dispatch(detail_movie(false))} className="home" to="/">
-                  Home
+                  MOVIE
                 </Link>
               )}
             </div>
           </li>
           {searchOptions ? (
             <Link to="/search">
-              <button onClick={() => dispatch(search_options(false))}>ПОИСК ФИЛЬМА</button>
+              <button className="header_button" onClick={() => dispatch(search_options(false))}>
+                ПОИСК ФИЛЬМА
+              </button>
             </Link>
           ) : (
             <Link to="/">
-              <button onClick={() => dispatch(search_options(true))}>НАЗАД НА ГЛАВНУЮ</button>
+              <button className="header_button" onClick={() => dispatch(search_options(true))}>
+                НАЗАД НА ГЛАВНУЮ
+              </button>
             </Link>
           )}
           <li>
-            {!accountOffOn ? (
-              <button onClick={() => dispatch(openModal())} className="login">
+            {!isAuth ? (
+              <button className="header_button" onClick={() => dispatch(openModal())}>
                 Войти
               </button>
             ) : (
-              <button onClick={() => dispatch(exitAccount())} className="login">
+              <button className="header_button" onClick={() => dispatch(exitAccount())}>
                 Выйти
               </button>
             )}
