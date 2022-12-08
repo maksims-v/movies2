@@ -1,8 +1,8 @@
 import './movieDetail.css';
-import favoriteImg from './img/favorite.png';
-import favoriteOK from './img/favoriteOK.png';
-import bookmarksimg from './img/bookmarks.png';
-import bookmarksOK from './img/bookmarksOK.png';
+import favoriteImg from './img/favorite.svg';
+import favoriteOK from './img/favoriteOK.svg';
+import addToBookmark from './img/bookmarks.svg';
+import bookmarkRemove from './img/bookmarksOK.svg';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,13 @@ import {
   movie_with_favorite_data,
   add_to_bookmarks_arr,
 } from '../../moviesSlice/moviesSlice';
+
+const icontitle = {
+  addfav: 'Добавить в избранное',
+  removefav: 'Удалить из избранного',
+  addbookmark: 'Смотреть позже',
+  removebookmarks: 'Удалить из списка',
+};
 
 const MovieDetail = () => {
   const {
@@ -53,9 +60,13 @@ const MovieDetail = () => {
       const sortetArray = sortData.map((movie) => {
         if (item.id == movie.id && item.bookmarks === false) {
           dispatch(add_to_bookmarks_arr([...bookmarksArr, ...[{ ...item, bookmarks: true }]]));
+          dispatch(detail_movie({ ...item, bookmarks: true }));
+
           return { ...movie, bookmarks: true };
         } else if (item.id == movie.id && item.bookmarks === true) {
           dispatch(add_to_bookmarks_arr(bookmarksArr.filter((movie) => movie.id != item.id)));
+          dispatch(detail_movie({ ...item, bookmarks: false }));
+
           return { ...movie, bookmarks: false };
         }
         return movie;
@@ -86,20 +97,32 @@ const MovieDetail = () => {
               </div>
               <div className="movie_detail_wrapper_header_description">
                 {!searchOptions || favoriteOn ? null : (
-                  <>
+                  <div className="favoritesIcon">
                     <div
                       onClick={() => addToFavorite(detailMovie)}
-                      className="movie_card_img"
+                      className="favoritesIcon"
                       href="">
-                      <img src={!detailMovie.favorite ? favoriteImg : favoriteOK} alt="" />
+                      <img
+                        className="movie_card_img1"
+                        title={!detailMovie.favorite ? icontitle.addfav : icontitle.removefav}
+                        src={!detailMovie.favorite ? favoriteImg : favoriteOK}
+                        alt=""
+                      />
                     </div>
                     <div
                       onClick={() => addToBookmarks(detailMovie)}
-                      className="movie_card_img2"
+                      className="favoritesIcon"
                       href="">
-                      <img src={!detailMovie.bookmarks ? bookmarksimg : bookmarksOK} alt="" />
+                      <img
+                        className="movie_card_img2"
+                        title={
+                          !detailMovie.favorite ? icontitle.addbookmark : icontitle.removebookmarks
+                        }
+                        src={!detailMovie.bookmarks ? addToBookmark : bookmarkRemove}
+                        alt=""
+                      />
                     </div>
-                  </>
+                  </div>
                 )}
 
                 <div className="movie_description_tittle">{title}</div>

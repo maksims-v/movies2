@@ -75,3 +75,18 @@
   transition: all 0.3s;
   box-shadow: 0px 7px 14px lightskyblue, 0 2px 6px hwb(203 53% 2%);
 }
+
+.favoritesIcon {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.movie_card_img1 {
+  padding-bottom: 5px;
+}
+
+.movie_card_img2 {
+  padding: 2px 0px 0px 20px;
+}
