@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/moviesbase/static/css/main.b7301f4b.css",
-    "main.js": "/moviesbase/static/js/main.641c18ce.js",
+    "main.css": "/moviesbase/static/css/main.2516caf0.css",
+    "main.js": "/moviesbase/static/js/main.ea7a3011.js",
     "static/media/bookmarksOK.svg": "/moviesbase/static/media/bookmarksOK.34c663641d1a8c1f4efe8744ac1ad194.svg",
     "static/media/bookmarks.svg": "/moviesbase/static/media/bookmarks.72b8282ac33ef9218fb533b0fc6f4d57.svg",
     "static/media/favorite.svg": "/moviesbase/static/media/favorite.534629d31be80cc44e1a448d1fc57356.svg",
     "static/media/favoriteOK.svg": "/moviesbase/static/media/favoriteOK.8b506b0d16e9b024d38beea2ea82868c.svg",
     "index.html": "/moviesbase/index.html",
-    "main.b7301f4b.css.map": "/moviesbase/static/css/main.b7301f4b.css.map",
-    "main.641c18ce.js.map": "/moviesbase/static/js/main.641c18ce.js.map"
+    "main.2516caf0.css.map": "/moviesbase/static/css/main.2516caf0.css.map",
+    "main.ea7a3011.js.map": "/moviesbase/static/js/main.ea7a3011.js.map"
   },
   "entrypoints": [
-    "static/css/main.b7301f4b.css",
-    "static/js/main.641c18ce.js"
+    "static/css/main.2516caf0.css",
+    "static/js/main.ea7a3011.js"
   ]
 }
