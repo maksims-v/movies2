@@ -20,11 +20,15 @@ function Header() {
           <li>
             <div className="home" href="">
               {!detailMovie ? (
-                <a href="/" onClick={() => dispatch(detail_movie(false))} className="home" to="/">
+                <a
+                  href="/moviesbase"
+                  onClick={() => dispatch(detail_movie(false))}
+                  className="home"
+                  to="/moviesbase">
                   MOVIE
                 </a>
               ) : (
-                <Link onClick={() => dispatch(detail_movie(false))} className="home" to="/">
+                <Link onClick={() => dispatch(detail_movie(false))} className="home" to="/search">
                   MOVIE
                 </Link>
               )}
@@ -37,7 +41,7 @@ function Header() {
               </button>
             </Link>
           ) : (
-            <Link to="/">
+            <Link to="/moviesbase">
               <button className="header_button" onClick={() => dispatch(search_options(true))}>
                 НАЗАД НА ГЛАВНУЮ
               </button>

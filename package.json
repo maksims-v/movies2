@@ -1,6 +1,6 @@
 {
-  "homepage": "https://maksims-v.github.io/moviesbase/",
-  "name": "project_film",
+  "homepage": "https://maksims-v.github.io/moviesbase",
+  "name": "moviesbase",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

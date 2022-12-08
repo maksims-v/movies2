@@ -119,7 +119,7 @@ const MovieDetail = () => {
                   <Link
                     onClick={() => dispatch(detail_movie(false))}
                     className="movie_description_bottom"
-                    to="/">
+                    to="/moviesbase">
                     Назад
                   </Link>
                 )}

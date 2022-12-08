@@ -39,13 +39,13 @@ function App() {
             {!detailMovie && <Filter />}
             <div className="movies">
               <Routes>
-                <Route path={`/search`} element={<SearchPage />} />
+                <Route path="/moviesbase" element={<MoviList />} />
+                <Route path="/search" element={<SearchPage />} />
                 {!searchOptions ? (
                   <Route path={`/search/${detailMovie.id}`} element={<MovieDetail />} />
                 ) : (
                   <Route path={`/${detailMovie.id}`} element={<MovieDetail />} />
                 )}
-                <Route index element={<MoviList />} />
               </Routes>
             </div>
           </div>

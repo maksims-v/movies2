@@ -6,8 +6,6 @@ import { detail_movie } from '../../moviesSlice/moviesSlice';
 function MovieCard({ item }) {
   const link = 'https://image.tmdb.org/t/p/w500';
 
-  const [gi, useGi] = useState()
-
   const { searchOptions } = useSelector((data) => data);
   const dispatch = useDispatch();
 
