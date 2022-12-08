@@ -32,17 +32,16 @@ const MovieDetail = () => {
     bookmarksArr,
     sortData,
   } = useSelector((data) => data);
-  const dispatch = useDispatch();
 
-  const addToFavorite = (item) => {
+  function addToFavoriteArray(item, arr) {
     if (isAuth) {
       const sortetArray = sortData.map((movie) => {
         if (item.id == movie.id && item.favorite === false) {
-          dispatch(add_to_favorite_arr([...favoriteArr, ...[{ ...item, favorite: true }]]));
+          dispatch(add_to_favorite_arr([...arr, ...[{ ...item, favorite: true }]]));
           dispatch(detail_movie({ ...item, favorite: true }));
           return { ...movie, favorite: true };
         } else if (item.id == movie.id && item.favorite === true) {
-          dispatch(add_to_favorite_arr(favoriteArr.filter((movie) => movie.id != item.id)));
+          dispatch(add_to_favorite_arr(arr.filter((movie) => movie.id != item.id)));
           dispatch(detail_movie({ ...item, favorite: false }));
           return { ...movie, favorite: false };
         }
@@ -53,19 +52,30 @@ const MovieDetail = () => {
     } else {
       alert('Нужно войти в аккаунт! ');
     }
+  }
+
+  const { release_date, vote_average, genre_ids, backdrop_path, title, overview } = detailMovie;
+  const dispatch = useDispatch();
+
+  const addToFavorite = (detailMovie) => {
+    addToFavoriteArray(detailMovie, favoriteArr);
   };
 
-  const addToBookmarks = (item) => {
+  const addToBookmarks = ({ detailMovie, bookmarksArr }) => {
     if (isAuth) {
       const sortetArray = sortData.map((movie) => {
-        if (item.id == movie.id && item.bookmarks === false) {
-          dispatch(add_to_bookmarks_arr([...bookmarksArr, ...[{ ...item, bookmarks: true }]]));
-          dispatch(detail_movie({ ...item, bookmarks: true }));
+        if (detailMovie.id == movie.id && detailMovie.bookmarks === false) {
+          dispatch(
+            add_to_bookmarks_arr([...bookmarksArr, ...[{ ...detailMovie, bookmarks: true }]]),
+          );
+          dispatch(detail_movie({ ...detailMovie, bookmarks: true }));
 
           return { ...movie, bookmarks: true };
-        } else if (item.id == movie.id && item.bookmarks === true) {
-          dispatch(add_to_bookmarks_arr(bookmarksArr.filter((movie) => movie.id != item.id)));
-          dispatch(detail_movie({ ...item, bookmarks: false }));
+        } else if (detailMovie.id == movie.id && detailMovie.bookmarks === true) {
+          dispatch(
+            add_to_bookmarks_arr(bookmarksArr.filter((movie) => movie.id != detailMovie.id)),
+          );
+          dispatch(detail_movie({ ...detailMovie, bookmarks: false }));
 
           return { ...movie, bookmarks: false };
         }
@@ -78,80 +88,59 @@ const MovieDetail = () => {
     }
   };
 
-  const { release_date, vote_average, genre_ids, backdrop_path, title, overview } = detailMovie;
-
   const genre = movieGenreData.filter((item) => genre_ids.includes(item.id));
 
   const picture = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
 
-  console.log(detailMovie.bookmarks);
-
   return (
-    <Fragment>
-      <div className="movie_detail_wrapper">
-        <div className="movie_detail_container">
-          <div className="background_image_wrapper">
-            <div className="movie_detail_wrapper_header">
-              <div className="movie_detail_wrapper_header_img">
-                <img src={picture} alt="" />
-              </div>
-              <div className="movie_detail_wrapper_header_description">
-                {!searchOptions || favoriteOn ? null : (
-                  <div className="favoritesIcon">
-                    <div
-                      onClick={() => addToFavorite(detailMovie)}
-                      className="favoritesIcon"
-                      href="">
-                      <img
-                        className="movie_card_img1"
-                        title={!detailMovie.favorite ? icontitle.addfav : icontitle.removefav}
-                        src={!detailMovie.favorite ? favoriteImg : favoriteOK}
-                        alt=""
-                      />
-                    </div>
-                    <div
-                      onClick={() => addToBookmarks(detailMovie)}
-                      className="favoritesIcon"
-                      href="">
-                      <img
-                        className="movie_card_img2"
-                        title={
-                          !detailMovie.favorite ? icontitle.addbookmark : icontitle.removebookmarks
-                        }
-                        src={!detailMovie.bookmarks ? addToBookmark : bookmarkRemove}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="movie_description_tittle">{title}</div>
-                <div className="movie_genre">Жанр: {`${genre.map((item) => item.name)}`}</div>
-                <div className="movie_description_raiting">
-                  Рейтинг: <span>{vote_average}</span> <span>Дата выхода: {release_date} </span>
-                </div>
-                <div className="movie_description_text">{overview}</div>
-                {!searchOptions ? (
-                  <Link
-                    onClick={() => dispatch(detail_movie(false))}
-                    className="movie_description_bottom"
-                    to="/search">
-                    Назад
-                  </Link>
-                ) : (
-                  <Link
-                    onClick={() => dispatch(detail_movie(false))}
-                    className="movie_description_bottom"
-                    to="/moviesbase">
-                    Назад
-                  </Link>
-                )}
-              </div>
+    <div className="movie_detail_wrapper">
+      <div className="movie_detail_wrapper_header_img">
+        <img src={picture} alt="" />
+      </div>
+      <div className="movie_detail_wrapper_header_description">
+        {!searchOptions || favoriteOn ? null : (
+          <div className="favoritesIcon">
+            <div onClick={() => addToFavorite(detailMovie)} className="favoritesIcon" href="">
+              <img
+                className="movie_card_img1"
+                title={!detailMovie.favorite ? icontitle.addfav : icontitle.removefav}
+                src={!detailMovie.favorite ? favoriteImg : favoriteOK}
+                alt=""
+              />
+            </div>
+            <div
+              onClick={() => addToBookmarks({ detailMovie, bookmarksArr })}
+              className="favoritesIcon"
+              href="">
+              <img
+                className="movie_card_img2"
+                title={!detailMovie.favorite ? icontitle.addbookmark : icontitle.removebookmarks}
+                src={!detailMovie.bookmarks ? addToBookmark : bookmarkRemove}
+                alt=""
+              />
             </div>
           </div>
+        )}
+        <div className="movie_description_tittle">{title}</div>
+        <div className="movie_genre">Жанр: {`${genre.map((item) => item.name)}`}</div>
+        <div className="movie_description_raiting">
+          Рейтинг: <span className="raiting_color">{vote_average}</span>{' '}
+          <span>Дата выхода: {release_date} </span>
+        </div>
+        <div className="movie_description_text">{overview}</div>
+        <div className="movie_description_bottom">
+          {!searchOptions ? (
+            <Link onClick={() => dispatch(detail_movie(false))} to="/search">
+              Назад
+            </Link>
+          ) : (
+            <Link onClick={() => dispatch(detail_movie(false))} to="/moviesbase">
+              Назад
+            </Link>
+          )}
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

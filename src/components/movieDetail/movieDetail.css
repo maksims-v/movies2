@@ -1,77 +1,73 @@
 .movie_detail_wrapper {
-  left: 0px;
-  position: absolute;
-  width: 100%;
-  min-height: 600px;
-  background-color: rgba(14, 31, 38, 0.8);
-  height: 100%;
-}
-
-.movie_detail_container {
-  min-height: 600px;
-  height: 100%;
+  padding: 20px 0px 0px 0px;
   width: 100%;
   display: flex;
-  flex-direction: column;
-}
-.background_image_wrapper {
-  height: 100%;
-  background: rgb(20, 20, 20);
-  background: linear-gradient(180deg, rgba(20, 20, 20, 1) 30%, rgba(0, 83, 130, 1) 100%);
-}
-
-.movie_detail_wrapper_header {
-  padding-top: 100px;
-  margin-left: 10%;
-  display: flex;
+  justify-content: center;
   color: white;
+}
+
+.movie_detail_wrapper_header_img {
   height: 100%;
 }
 
 .movie_detail_wrapper_header_img img {
-  height: 400px;
+  height: auto;
 }
 
 .movie_detail_wrapper_header_description {
-  max-width: 600px;
-  margin-left: 80px;
+  max-width: 500px;
+  padding-left: 20px;
   text-align: left;
 }
 .movie_description_tittle {
-  font-size: 30px;
-  margin-bottom: 20px;
+  color: #c14543;
+  font-size: 25px;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #005382;
 }
 
 .movie_genre {
   font-size: 20px;
   margin-bottom: 30px;
+  font-weight: 100;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #005382;
 }
 
 .movie_description_raiting {
   font-size: 20px;
-  margin-bottom: 30px;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #005382;
 }
+.raiting_color {
+  color: #00a340;
+}
+
 .movie_description_raiting span {
-  margin-right: 50px;
+  padding-right: 50px;
 }
 
 .movie_description_text {
-  font-size: 20px;
-  margin-bottom: 60px;
-  line-height: 28px;
+  font-size: 18px;
   font-weight: 100;
+  padding-bottom: 8px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #005382;
 }
 
-.movie_description_bottom {
-  font-size: 30px;
+.movie_description_bottom a {
+  font-size: 22px;
   color: white;
   background-color: #005382;
-  padding: 6px 20px 10px 20px;
-  border: 1px solid inherit;
+  padding: 7px 20px;
+  border: 1px solid black;
   border-radius: 5px;
 }
 
-.movie_description_bottom:hover {
+.movie_description_bottom a:hover {
   transition: all 0.3s;
   box-shadow: 0px 7px 14px lightskyblue, 0 2px 6px hwb(203 53% 2%);
 }

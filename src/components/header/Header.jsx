@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import Modal from '../modal/Modal';
 
 function Header() {
-  const { searchOptions, detailMovie, isAuth } = useSelector((data) => data);
+  const { searchOptions, detailMovie, isAuth, favorite_on } = useSelector((data) => data);
   const dispatch = useDispatch();
   return (
     <>
@@ -43,7 +43,7 @@ function Header() {
           ) : (
             <Link to="/moviesbase">
               <button className="header_button" onClick={() => dispatch(search_options(true))}>
-                НАЗАД НА ГЛАВНУЮ
+                ГЛАВНАЯ
               </button>
             </Link>
           )}

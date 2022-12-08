@@ -9,7 +9,6 @@ import './searchPage.css';
 function SearchPage() {
   const { data, searchFilterData, movieGenreData, count } = useSelector((state) => state);
   const dispatch = useDispatch();
-
   const [popularityValue, setPopularityValue] = useState('0');
   const [raitingValue, setRaitingValue] = useState('0');
   const [genreValue, setGenreValue] = useState('0');
@@ -64,13 +63,13 @@ function SearchPage() {
   };
 
   return (
-    <>
-      <div className="search_wrapper">
+    <div className="search_wrapper">
+      <div className="search_container">
         <select value={genreValue} onChange={filterGenre} className="search_filter ">
           <option value="0" select>
             Выберите жанр
           </option>
-          {movieGenreData.map((item, id) => (
+          {movieGenreData.map((item) => (
             <Fragment key={item.id}>
               <option value={item.id} select>
                 {item.name}
@@ -80,7 +79,7 @@ function SearchPage() {
         </select>
         <select value={raitingValue} onChange={filterRaiting} className="search_filter ">
           <option value="0" select>
-            Выберите оценку фильма
+            Выберите оценку
           </option>
           <option value="1">Низкая</option>
           <option value="2">Высокая</option>
@@ -94,12 +93,9 @@ function SearchPage() {
         </select>
       </div>
       <div className="search_movie_count">Найдено фильмов: {searchFilterData.length}</div>
-
       <div className="search_card">
         <div className="search_buttons">
-          <button onClick={() => dispatch(search_counter())}>
-            Не подходит. <br /> Следующий
-          </button>
+          <button onClick={() => dispatch(search_counter())}>Следующий</button>
           <button onClick={resetSearchFilter}>Сбросить фильтр</button>
         </div>
         <div className="search_item">
@@ -115,7 +111,7 @@ function SearchPage() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

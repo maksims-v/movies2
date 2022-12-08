@@ -10,17 +10,14 @@ import MoviList from './components/movieList/MovieList';
 import Filter from './components/filter/Filter.jsx';
 import MovieDetail from './components/movieDetail/MovieDetail.jsx';
 import SearchPage from './components/searchPage/SearchPage';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 
 function App() {
   const { searchOptions, detailMovie } = useSelector((data) => data);
   const dispatch = useDispatch();
 
-  // const { request } = useHttp();
-
   useEffect(() => {
     dispatch(get_data(movies));
+    console.log('hoj');
   }, []);
 
   // concurrently
@@ -31,27 +28,21 @@ function App() {
   // }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <div className="App">
-        <div className="wrapper">
-          <Header />
-          <div className="movie_content">
-            {!detailMovie && <Filter />}
-            <div className="movies">
-              <Routes>
-                <Route path="/moviesbase" element={<MoviList />} />
-                <Route path="/search" element={<SearchPage />} />
-                {!searchOptions ? (
-                  <Route path={`/search/${detailMovie.id}`} element={<MovieDetail />} />
-                ) : (
-                  <Route path={`/${detailMovie.id}`} element={<MovieDetail />} />
-                )}
-              </Routes>
-            </div>
-          </div>
-        </div>
+    <div className="App">
+      <Header />
+      <div className="movie_content">
+        {!detailMovie && <Filter />}
+        <Routes>
+          <Route path="/moviesbase" element={<MoviList />} />
+          <Route path="/search" element={<SearchPage />} />
+          {!searchOptions ? (
+            <Route path={`/search/${detailMovie.id}`} element={<MovieDetail />} />
+          ) : (
+            <Route path={`/${detailMovie.id}`} element={<MovieDetail />} />
+          )}
+        </Routes>
       </div>
-    </Box>
+    </div>
   );
 }
 
