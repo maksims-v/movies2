@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/moviesbase/static/css/main.43d57dad.css",
-    "main.js": "/moviesbase/static/js/main.274ea6d1.js",
+    "main.js": "/moviesbase/static/js/main.8c21a3e2.js",
     "index.html": "/moviesbase/index.html",
     "main.43d57dad.css.map": "/moviesbase/static/css/main.43d57dad.css.map",
-    "main.274ea6d1.js.map": "/moviesbase/static/js/main.274ea6d1.js.map"
+    "main.8c21a3e2.js.map": "/moviesbase/static/js/main.8c21a3e2.js.map"
   },
   "entrypoints": [
     "static/css/main.43d57dad.css",
-    "static/js/main.274ea6d1.js"
+    "static/js/main.8c21a3e2.js"
   ]
 }
