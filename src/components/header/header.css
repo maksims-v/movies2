@@ -1,7 +1,8 @@
 .header {
   height: 70px;
   width: 100%;
-  background-color: #141414;
+  background: rgb(20, 20, 20);
+  background: linear-gradient(90deg, rgba(20, 20, 20, 1) 20%, rgba(0, 83, 130, 1) 100%);
 }
 
 .header_menu {
@@ -28,8 +29,9 @@
   padding: 7px 20px;
   font-size: 20px;
   border: 1px solid transparent;
-  border-radius: 5px;
+  border-radius: 6px;
   background-color: #005382;
+  border: 1px solid black;
   color: white;
 }
 

@@ -131,87 +131,78 @@ function Filter() {
   };
 
   return (
-    <div className="movie_filter">
-      <div
-        className={
-          !searchOptions ? 'filter_wrapper filter_wrapper_active_search' : 'filter_wrapper'
-        }>
-        <span className="filter_title">Филтры:</span>
-        <div className="filter_block_wrapper">
-          <button onClick={resetFilter} className="filter_block_button_clear_all">
-            Сбросить все фильтры
+    <div
+      className={!searchOptions ? 'filter_wrapper filter_wrapper_active_search' : 'filter_wrapper'}>
+      <div className="filter_block_wrapper">
+        <button onClick={resetFilter} className="filter_block_button_clear_all">
+          Сбросить все фильтры
+        </button>
+        <div className="sort">Сортировать по:</div>
+        <form>
+          <div className="sort_selected_wrapper">
+            <select
+              value={favoriteValue}
+              className={isAuth ? 'sort_selected' : 'sort_selected autorisationUserSelectActive'}
+              onChange={selectFavorite}>
+              <option value="0" select className="option">
+                Все
+              </option>
+              <option value="1" select>
+                Смотреть позже
+              </option>
+              <option value="2">Избранные</option>
+            </select>
+            <select value={raitingValue} onChange={selectRaitingValue} className="sort_selected ">
+              <option value="0" select>
+                Популярные по убыванию
+              </option>
+              <option value="1">Популярные по возрастанию</option>
+              <option value="2">Рейтинг по убыванию</option>
+              <option value="3">Рейтинг по возрастанию</option>
+            </select>
+            <select value={selectedYearReset} onChange={selectYear} className="sort_selected">
+              <option value="allYears" select>
+                Все года
+              </option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+            </select>
+          </div>
+        </form>
+        <div className="radio_filter_block">
+          {movieGenreData.map((item, id) => (
+            <Fragment key={id}>
+              <input
+                value={ckeckboxChecked}
+                onChange={filterId}
+                type="checkbox"
+                className="custom-checkbox"
+                id={item.id}
+                name={item.name}
+                checked={ckeckboxChecked}
+              />
+              <label htmlFor={item.id}>{item.name}</label>
+            </Fragment>
+          ))}
+        </div>
+        <div className="buttons_wrapper">
+          <button
+            onClick={pageBack}
+            className={currentPageInFilter === 1 ? 'back_next_button active' : 'back_next_button'}>
+            Назад
           </button>
-          <div className="sort">Сортировать по:</div>
-          <form>
-            <div className="sort_selected_wrapper">
-              <select
-                value={favoriteValue}
-                className={isAuth ? 'sort_selected' : 'sort_selected autorisationUserSelectActive'}
-                onChange={selectFavorite}>
-                <option value="0" select className="option">
-                  Все
-                </option>
-                <option value="1" select>
-                  Смотреть позже
-                </option>
-                <option value="2">Избранные</option>
-              </select>
-              <select value={raitingValue} onChange={selectRaitingValue} className="sort_selected ">
-                <option value="0" select>
-                  Популярные по убыванию
-                </option>
-                <option value="1">Популярные по возрастанию</option>
-                <option value="2">Рейтинг по убыванию</option>
-                <option value="3">Рейтинг по возрастанию</option>
-              </select>
-              <select value={selectedYearReset} onChange={selectYear} className="sort_selected">
-                <option value="allYears" select>
-                  Все года
-                </option>
-                <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-              </select>
-            </div>
-          </form>
-          <div className="radio_filter_block">
-            {movieGenreData.map((item, id) => (
-              <Fragment key={id}>
-                <input
-                  value={ckeckboxChecked}
-                  onChange={filterId}
-                  type="checkbox"
-                  className="custom-checkbox"
-                  id={item.id}
-                  name={item.name}
-                  checked={ckeckboxChecked}
-                />
-                <label htmlFor={item.id}>{item.name}</label>
-              </Fragment>
-            ))}
-          </div>
-          <div className="buttons_wrapper">
-            <button
-              onClick={pageBack}
-              className={
-                currentPageInFilter === 1 ? 'back_next_button active' : 'back_next_button'
-              }>
-              Назад
-            </button>
-            <button
-              onClick={nextPage}
-              className={
-                currentPageInFilter === numberOfPage
-                  ? 'back_next_button active'
-                  : 'back_next_button'
-              }>
-              Вперёд
-            </button>
-          </div>
-          <div className="number_of_list">
-            <span> {currentPageInFilter} </span> of <span>{numberOfPage}</span>
-          </div>
+          <button
+            onClick={nextPage}
+            className={
+              currentPageInFilter === numberOfPage ? 'back_next_button active' : 'back_next_button'
+            }>
+            Вперёд
+          </button>
+        </div>
+        <div className="number_of_list">
+          <span> {currentPageInFilter} </span> of <span>{numberOfPage}</span>
         </div>
       </div>
     </div>
