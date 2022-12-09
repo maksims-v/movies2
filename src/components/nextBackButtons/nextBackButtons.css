@@ -1,0 +1,27 @@
+.buttons_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back_next_button {
+  padding: 7px 0px;
+  width: 100%;
+  max-width: 95px;
+  background-color: #005382;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.back_next_button:hover {
+  background-color: rgba(0, 83, 130, 0.75);
+  transition: all 0.4s;
+}
+
+.back_next_button.active {
+  background-color: rgba(0, 83, 130, 0.75);
+}
+
+button {
+  color: white;
+}

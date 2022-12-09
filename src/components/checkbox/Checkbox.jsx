@@ -1,3 +1,4 @@
+import './checkbox.css';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,7 +8,7 @@ import {
   countcurrentpage,
 } from '../../moviesSlice/moviesSlice';
 
-const SearchSelect = ({
+const Checkbox = ({
   setSelectValues,
   selectValues,
   setRaitingValue,
@@ -117,4 +118,4 @@ const SearchSelect = ({
   );
 };
 
-export default SearchSelect;
+export default Checkbox;

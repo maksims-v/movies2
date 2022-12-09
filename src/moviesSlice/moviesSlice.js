@@ -182,6 +182,10 @@ const moviesSlice = createSlice({
       state.isAuth = false;
       state.enterAccount = true;
     },
+
+    movieGenreDataToggle: (state, action) => {
+      state.movieGenreData = action.payload;
+    },
   },
 });
 
@@ -208,4 +212,5 @@ export const {
   openModal,
   exitAccount,
   countcurrentpage,
+  movieGenreDataToggle,
 } = actions;

@@ -1,0 +1,30 @@
+.modal_inputs_wrapper {
+  text-align: center;
+}
+
+input {
+  margin: 10px 2px 10px 2px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #eaebef;
+  padding: 0px 0px 0px 10px;
+  width: 80%;
+  height: 50px;
+  line-height: 40px;
+}
+
+.button {
+  color: white;
+  font-weight: 400;
+  width: 30%;
+  background-color: #005382;
+  padding: 10px 20px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.button:hover {
+  transition: all 0.3s;
+  box-shadow: 0px 7px 14px lightskyblue, 0 2px 6px hwb(203 53% 2%);
+}
